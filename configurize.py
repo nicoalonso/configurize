@@ -42,13 +42,13 @@ class Configurize:
         '''
         folder = Path.home() / FOLDER_PROJECTS;
         # Create folder if not exists
-        if not folder.exists():
+        if not folder.exists():  # pragma: no cover
             folder.mkdir()
             MsgTerm.debug('[Config] create folder %s' % str(folder))
 
         self.configFolder = folder / self.project
         # Create project folder if not exists
-        if not self.configFolder.exists():
+        if not self.configFolder.exists():  # pragma: no cover
             self.configFolder.mkdir()
             MsgTerm.debug('[Config] create folder %s' % str(self.configFolder))
 
@@ -69,7 +69,7 @@ class Configurize:
         # Check if config file exists
         MsgTerm.debug('[Config] Search config file %s' % self.filepath)
         if self.filepath.exists() and self.filepath.is_file():
-            MsgTerm.debug('[Config] load config %s' % self.filepath)
+            MsgTerm.debug('[Config] load config: %s' % self.filepath)
             with self.filepath.open() as json_file:
                 self.config = json.load(json_file)
         else:
@@ -79,7 +79,7 @@ class Configurize:
             if localConfig.exists() and localConfig.is_file():
                 with localConfig.open() as localConfig:
                     self.config = json.load(localConfig)
-            else:
+            else:  # pragma: no cover
                 MsgTerm.fatal('[Config] Configuration file not found')
                 return False
 
@@ -146,6 +146,7 @@ class Configurize:
             # Store value
             aux[name] = value
 
+
     def remove(self, key_name):
         '''Remove key from config
         
@@ -172,7 +173,7 @@ class Configurize:
             if aux != None and name in aux:
                 del aux[name]
             else:
-                MsgTerm.fatal('[Config] parameter not exists { %s }' % name)
+                MsgTerm.fatal('[Config] parameter not exists { %s }' % key_name)
                 return False
 
         return True
@@ -309,7 +310,7 @@ class Configurize:
             else:
                 result = False
         else:
-            MsgTerm.alert('[Config] Unknown action: %s' % self.args.config, nl=True)
+            MsgTerm.alert('[Config] Unknown action: %s' % action, nl=True)
             MsgTerm.help('use the command { help } for more information', section='Config', nl=True)
             result = False
 
