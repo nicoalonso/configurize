@@ -276,9 +276,9 @@ class Configurize:
             info = [
                 'list of commands:',
                 '',
-                '  list               : List of configuration',
                 '  help               : Show this help',
-                '  section.name=value : Set a value for a key',
+                '  list               : List of configuration',
+                '  section.name=value : Set a parameter',
                 '  section.name-      : Remove a parameter'
             ]
             MsgTerm.help(info, section='Config')
